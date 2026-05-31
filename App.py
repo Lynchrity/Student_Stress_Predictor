@@ -282,30 +282,27 @@ if page == "📋  Predict":
     with st.container(border=True):
         st.markdown('<div class="sec-label">👤 Student Identity</div>', unsafe_allow_html=True)
         c1, c2 = st.columns(2)
-        with c1: student_name = st.text_input("Full name", placeholder="e.g. Budi Santoso")
+        with c1: student_name = st.text_input("Full Name", placeholder="Enter your name")
         with c2: gender = st.selectbox("Gender", ["Male", "Female"], help="For records only — not used in prediction")
 
     with st.container(border=True):
         st.markdown('<div class="sec-label">📋 Student Information</div>', unsafe_allow_html=True)
         c1, c2 = st.columns(2)
         with c1:
-            screen_time     = st.slider("🖥️  Screen Time (hrs/day)", 0, 16, 5)
-            social_media    = st.slider("📱  Social Media Use (hrs/day)", 0, 12, 3)
-            sleep_hours     = st.slider("😴  Sleep Hours (hrs/day)", 0, 12, 7)
-            exam_frequency  = st.selectbox("📝  Exam Frequency", ["Monthly", "Biweekly", "Weekly"])
+            screen_time     = st.slider("🖥️  Screen Time (hrs/day)", min_value=1, max_value=11, value=5)
+            social_media    = st.slider("📱  Social Media Use (hrs/day)", min_value=0, max_value=7, value=3)
+            sleep_hours     = st.slider("😴  Sleep Hours (hrs/day)", min_value=4, max_value=9, value=7)
+            
+            exam_enc        = st.slider("📝  Exam Frequency Pressure", min_value=1, max_value=9, value=5)
         with c2:
-            assignment_load = st.selectbox("📚  Assignment Load", ["Low", "Medium", "High"])
-            family_support  = st.selectbox("🏠  Family Support",  ["Low", "Moderate", "High"])
-            anxiety_level   = st.selectbox("💭  Anxiety Level",   ["Low", "Medium", "High"])
+            load_enc = st.slider("📚  Assignment Load", min_value=1, max_value=9, value=5)
+            support_enc  = st.slider("🏠  Family Support Availability", min_value=1, max_value=9, value=5)
+            anxiety_enc   = st.slider("💭  Anxiety Level Intensity", min_value=1, max_value=9, value=5)
 
     if st.button("🧠  Predict My Stress Level"):
         if not student_name.strip():
             st.warning("Please enter the student's name first.")
         else:
-            exam_enc    = {"Monthly":0,"Biweekly":1,"Weekly":2}[exam_frequency]
-            load_enc    = {"Low":0,"Medium":1,"High":2}[assignment_load]
-            support_enc = {"Low":0,"Moderate":1,"High":2}[family_support]
-            anxiety_enc = {"Low":0,"Medium":1,"High":2}[anxiety_level]
             features = [[screen_time, support_enc, load_enc, exam_enc, anxiety_enc, social_media, sleep_hours]]
 
             if model:
@@ -361,7 +358,7 @@ if page == "📋  Predict":
                 "result": prediction, "confidence": confidence,
                 "time": datetime.now().strftime("%d %b %Y, %H:%M")
             })
-            
+           
 
 # ══════════════════════════════════════════════
 # HISTORY
@@ -390,6 +387,11 @@ elif page == "🕘  History":
             col.markdown(f'<div class="stat-box"><p style="font-size:32px;font-weight:800;color:{color};margin:0;">{val}</p><p style="font-size:11px;color:#8aa0bc;text-transform:uppercase;letter-spacing:0.06em;margin:4px 0 0;">{lbl}</p></div>', unsafe_allow_html=True)
 
         st.markdown("<br>", unsafe_allow_html=True)
+        csv = pd.DataFrame(h).to_csv(index=False).encode("utf-8")
+        st.download_button("⬇️ Export CSV", data=csv, file_name="stresscheck_history.csv", mime="text/csv")
+
+
+        st.markdown("<br>", unsafe_allow_html=True)
         badge = {
             "Low":    '<span class="badge-low">🟢 Low</span>',
             "Medium": '<span class="badge-medium">🟡 Medium</span>',
@@ -413,10 +415,7 @@ elif page == "🕘  History":
                 </div>
             </div>""", unsafe_allow_html=True)
 
-        st.markdown("<br>", unsafe_allow_html=True)
-        csv = pd.DataFrame(h).to_csv(index=False).encode("utf-8")
-        st.download_button("⬇️ Export CSV", data=csv, file_name="stresscheck_history.csv", mime="text/csv")
-
+        
 # ══════════════════════════════════════════════
 # INFORMATION
 # ══════════════════════════════════════════════
