@@ -29,7 +29,11 @@ Family_Support_mean,5.99,4.58,3.31
 Family_Support_std,2.38,2.49,2.15
 Anxiety_Level_mean,4.17,5.39,6.45
 Anxiety_Level_std,2.44,2.51,2.23
-University_Type_mean,0.99,1.02,0.92
-University_Type_std,0.82,0.82,0.81
 Stress_Score_mean,5.46,14.92,23.36
 Stress_Score_std,3.8,2.75,2.41
+University_Type_National University_mean,0.34,0.33,0.34
+University_Type_National University_std,0.47,0.47,0.47
+University_Type_Private University_mean,0.33,0.35,0.29
+University_Type_Private University_std,0.47,0.48,0.45
+University_Type_Public University_mean,0.34,0.32,0.37
+University_Type_Public University_std,0.47,0.47,0.48
