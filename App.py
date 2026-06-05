@@ -109,9 +109,9 @@ section[data-testid="stSidebar"] div[data-testid="stButton"] button {
 .stButton > button:hover { transform: translateY(-3px) !important; box-shadow: 0 10px 28px rgba(19,86,160,0.4) !important; }
 
 .result-wrap { border-radius:20px; padding:2rem; margin:1.5rem 0; animation:popIn 0.5s ease forwards; }
-.result-high   { background:linear-gradient(135deg,rgba(255,200,200,0.25),rgba(255,150,150,0.15)); border:1.5px solid rgba(200,80,80,0.4); }
-.result-medium { background:linear-gradient(135deg,rgba(255,240,180,0.25),rgba(255,220,100,0.15)); border:1.5px solid rgba(220,180,0,0.4); }
-.result-low    { background:linear-gradient(135deg,rgba(180,240,160,0.25),rgba(140,220,100,0.15)); border:1.5px solid rgba(100,190,60,0.4); }
+.result-high {background: #F8D7DA; border: 1.5px solid #DC3545;}
+.result-medium {background: #FFF3CD; border: 1.5px solid #FFC107;}
+.result-low {background: #D4EDDA; border: 1.5px solid #28A745;}
 .result-title  { font-size:32px; font-weight:800; margin:0 0 6px; }
 .conf-track { background:rgba(128,128,128,0.15); border-radius:99px; height:10px; margin:12px 0 4px; overflow:hidden; }
 .conf-fill  { height:100%; border-radius:99px; animation:barGrow 1.2s cubic-bezier(0.34,1.56,0.64,1) forwards 0.3s; width:0%; }
@@ -271,8 +271,8 @@ if page == "📋  Predict":
         c1, c2 = st.columns(2)
         with c1:
             screen_time     = st.slider("🖥️  Screen Time (hrs/day)", min_value=1, max_value=11, value=5)
-            social_media    = st.slider("📱  Social Media Use (hrs/day)", min_value=0, max_value=7, value=3)
-            sleep_hours     = st.slider("😴  Sleep Hours (hrs/day)", min_value=4, max_value=9, value=7)
+            social_media    = st.slider("📱  Social Media Use (hrs/day)", min_value=1, max_value=9, value=3)
+            sleep_hours     = st.slider("😴  Sleep Hours (hrs/day)", min_value=1, max_value=9, value=7)
             
             exam_enc        = st.slider("📝  Exam Frequency Pressure", min_value=1, max_value=9, value=5)
         with c2:
@@ -316,12 +316,14 @@ if page == "📋  Predict":
             st.markdown(f"### Result for **{student_name}**")
             st.markdown(f"""
             <div class="result-wrap {card_cls}">
-                <p style="font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.6);margin:0 0 6px;font-weight:600;">Predicted stress level</p>
-                <p class="result-title" style="color:white;">{label}</p>
-                <p style="font-size:13px;color:rgba(255,255,255,0.85);margin:8px 0 16px;line-height:1.7;">{desc}</p>
-                <p style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.6);margin:0 0 4px;">Model confidence — {confidence}%</p>
-                <div class="conf-track"><div class="conf-fill {bar_cls}" style="width:{confidence}%;"></div></div>
-            </div>""", unsafe_allow_html=True)
+            <p style="font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:#666;margin:0 0 6px;font-weight:600;">Predicted stress level</p>
+            <p class="result-title" style="color:#222;">{label}</p>
+            <p style="font-size:13px;color:#333;margin:8px 0 16px;line-height:1.7;">{desc}</p>
+            <p style="font-size:12px;font-weight:600;color:#555;margin:0 0 4px;">Model confidence — {confidence}%</p>
+            <div class="conf-track">
+            <div class="conf-fill {bar_cls}" style="width:{confidence}%;"></div>
+            </div>
+            """, unsafe_allow_html=True)
 
             st.markdown("**💡 Recommendations**")
             for icon, bg, title, body in tips[prediction]:
