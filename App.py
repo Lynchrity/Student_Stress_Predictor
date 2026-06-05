@@ -11,39 +11,30 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap');
 html, body, [class*="css"] { font-family: 'Sora', sans-serif; }
 
-.stApp { background: #ffffff !important; }
-.main .block-container { background: #ffffff !important; padding-top: 1.5rem; max-width: 880px; }
-[data-testid="stAppViewContainer"] { background: #ffffff !important; }
-[data-testid="stHeader"] { background: #ffffff !important; }
-section[data-testid="stSidebar"] > div { background: #0a1f3c !important; }
+/* ── REMOVED forced white backgrounds — let Streamlit's theme handle these ── */
+/* .stApp, stAppViewContainer, stHeader, block-container backgrounds are intentionally unset */
 
 [data-testid="stVerticalBlockBorderWrapper"] {
-    background: #ffffff !important; border-radius: 16px !important;
-    border: 1.5px solid #e2eaf5 !important;
-    box-shadow: 0 2px 12px rgba(10,31,60,0.06) !important;
+    border-radius: 16px !important;
+    border: 1.5px solid rgba(128,128,128,0.2) !important;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06) !important;
     transition: box-shadow 0.3s, transform 0.3s !important;
 }
-[data-testid="stVerticalBlockBorderWrapper"] > div { background: #ffffff !important; }
 [data-testid="stVerticalBlockBorderWrapper"]:hover {
-    box-shadow: 0 8px 28px rgba(10,31,60,0.1) !important;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.12) !important;
     transform: translateY(-2px) !important;
 }
 
+section[data-testid="stSidebar"] > div { background: #0a1f3c !important; }
 [data-testid="stSidebar"] * { color: #7aa3cc !important; }
 [data-testid="stSidebar"] hr {
     border-color: rgba(255,255,255,0.08) !important;
-    margin-top: 0.3rem !important;
-    margin-bottom: 0.5rem !important;
+    margin-top: 0.3rem !important; margin-bottom: 0.5rem !important;
 }
 
-/* ── Logo ── */
 .sidebar-logo-wrap {
-    display: flex; 
-    flex-direction: column; 
-    align-items: center;
-    padding: 2rem 0 1.4rem; 
-    padding: 0.8rem 0 0.5rem;
-    gap: 4px;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 0.8rem 0 0.5rem; gap: 4px;
 }
 .sidebar-logo-icon { font-size: 38px; line-height: 1; }
 .sidebar-logo-text {
@@ -51,24 +42,17 @@ section[data-testid="stSidebar"] > div { background: #0a1f3c !important; }
     color: #e8f2ff !important; letter-spacing: 0.01em;
 }
 
-/* ── Invisible logo button overlay ── */
 section[data-testid="stSidebar"] div[data-testid="stButton"] button {
-    position: absolute !important;
-    top: 20px !important; left: 0 !important;
-    width: 100% !important; height: 110px !important;
-    opacity: 0 !important; background: transparent !important;
-    border: none !important; box-shadow: none !important;
-    cursor: pointer !important; z-index: 10 !important;
-    padding: 0 !important; min-height: 0 !important;
+    position: absolute !important; top: 20px !important; left: 0 !important;
+    width: 100% !important; height: 110px !important; opacity: 0 !important;
+    background: transparent !important; border: none !important;
+    box-shadow: none !important; cursor: pointer !important;
+    z-index: 10 !important; padding: 0 !important; min-height: 0 !important;
 }
 
-/* ── Hide radio label completely ── */
 [data-testid="stSidebar"] [data-testid="stRadio"] > div:first-child,
-[data-testid="stSidebar"] [data-testid="stRadio"] > label {
-    display: none !important;
-}
+[data-testid="stSidebar"] [data-testid="stRadio"] > label { display: none !important; }
 
-/* ── Radio option rows ── */
 [data-testid="stSidebar"] .stRadio label {
     display: flex !important; align-items: center !important;
     padding: 8px 12px !important; border-radius: 8px !important;
@@ -76,28 +60,20 @@ section[data-testid="stSidebar"] div[data-testid="stButton"] button {
     cursor: pointer !important; transition: background 0.2s !important;
     margin-bottom: 2px !important;
 }
-[data-testid="stSidebar"] .stRadio label:hover {
-    background: rgba(255,255,255,0.07) !important;
-}
+[data-testid="stSidebar"] .stRadio label:hover { background: rgba(255,255,255,0.07) !important; }
 [data-testid="stSidebar"] .stRadio label:has(input:checked) {
     background: rgba(255,255,255,0.13) !important;
     color: #e8f2ff !important; font-weight: 600 !important;
 }
-[data-testid="stSidebar"] .stRadio label:has(input:checked) p {
-    color: #e8f2ff !important; font-weight: 600 !important;
-}
+[data-testid="stSidebar"] .stRadio label:has(input:checked) p { color: #e8f2ff !important; font-weight: 600 !important; }
 [data-testid="stSidebar"] .stRadio label > div:first-child { display: none !important; }
 [data-testid="stSidebar"] .stRadio div[role="radiogroup"] { gap: 2px !important; }
-
-/* ── Sub-items indented ── */
 [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:nth-child(4),
 [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:nth-child(5),
 [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:nth-child(6) {
-    padding-left: 28px !important;
-    font-size: 12px !important;
+    padding-left: 28px !important; font-size: 12px !important;
 }
 
-/* ── Animations ── */
 @keyframes gradientShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
 @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
 @keyframes fadeIn { from{opacity:0} to{opacity:1} }
@@ -117,7 +93,12 @@ section[data-testid="stSidebar"] div[data-testid="stButton"] button {
 .hero-title   { font-size:28px; font-weight:800; margin:0 0 8px; animation:fadeUp 0.5s ease 0.1s both; line-height:1.2; }
 .hero-sub     { font-size:14px; opacity:0.7; margin:0; animation:fadeUp 0.5s ease 0.2s both; }
 
-.sec-label { font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#1356a0; border-bottom:2px solid #eef3fb; padding-bottom:8px; margin-bottom:1.2rem; }
+/* ── Theme-aware section label ── */
+.sec-label {
+    font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
+    color:#1356a0; border-bottom:2px solid rgba(128,128,128,0.15);
+    padding-bottom:8px; margin-bottom:1.2rem;
+}
 
 .stButton > button {
     background: linear-gradient(135deg, #1356a0 0%, #0a1f3c 100%) !important;
@@ -129,34 +110,46 @@ section[data-testid="stSidebar"] div[data-testid="stButton"] button {
 .stButton > button:hover { transform: translateY(-3px) !important; box-shadow: 0 10px 28px rgba(19,86,160,0.4) !important; }
 
 .result-wrap { border-radius:20px; padding:2rem; margin:1.5rem 0; animation:popIn 0.5s ease forwards; }
-.result-high   { background:linear-gradient(135deg,#fff0f0,#ffd6d6); border:1.5px solid #f0a0a0; }
-.result-medium { background:linear-gradient(135deg,#fffbee,#fff0c0); border:1.5px solid #e8c840; }
-.result-low    { background:linear-gradient(135deg,#f0fbee,#d8f5c8); border:1.5px solid #90d060; }
+.result-high   { background:linear-gradient(135deg,rgba(255,200,200,0.25),rgba(255,150,150,0.15)); border:1.5px solid rgba(200,80,80,0.4); }
+.result-medium { background:linear-gradient(135deg,rgba(255,240,180,0.25),rgba(255,220,100,0.15)); border:1.5px solid rgba(220,180,0,0.4); }
+.result-low    { background:linear-gradient(135deg,rgba(180,240,160,0.25),rgba(140,220,100,0.15)); border:1.5px solid rgba(100,190,60,0.4); }
 .result-title  { font-size:32px; font-weight:800; margin:0 0 6px; }
-.conf-track { background:rgba(0,0,0,0.08); border-radius:99px; height:10px; margin:12px 0 4px; overflow:hidden; }
+.conf-track { background:rgba(128,128,128,0.15); border-radius:99px; height:10px; margin:12px 0 4px; overflow:hidden; }
 .conf-fill  { height:100%; border-radius:99px; animation:barGrow 1.2s cubic-bezier(0.34,1.56,0.64,1) forwards 0.3s; width:0%; }
 .conf-high   { background:linear-gradient(90deg,#e03030,#ff6060); }
 .conf-medium { background:linear-gradient(90deg,#c89010,#f5c030); }
 .conf-low    { background:linear-gradient(90deg,#308020,#60c040); }
 
-.tip-row { display:flex; gap:14px; align-items:flex-start; padding:12px 0; border-bottom:1px solid rgba(0,0,0,0.05); animation:fadeUp 0.4s ease forwards; opacity:0; }
+/* ── Tip rows: use currentColor-compatible grays ── */
+.tip-row { display:flex; gap:14px; align-items:flex-start; padding:12px 0; border-bottom:1px solid rgba(128,128,128,0.12); animation:fadeUp 0.4s ease forwards; opacity:0; }
 .tip-row:last-child { border-bottom:none; }
 .tip-icon { width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
 .tip-row:nth-child(1){animation-delay:0.1s} .tip-row:nth-child(2){animation-delay:0.2s}
 .tip-row:nth-child(3){animation-delay:0.3s} .tip-row:nth-child(4){animation-delay:0.4s}
 
-.badge-high   { background:#FEECEC; color:#8B1A1A; border:1.5px solid #F5A0A0; border-radius:8px; padding:4px 14px; font-size:12px; font-weight:600; display:inline-block; }
-.badge-medium { background:#FFF8E0; color:#7A4800; border:1.5px solid #F5D060; border-radius:8px; padding:4px 14px; font-size:12px; font-weight:600; display:inline-block; }
-.badge-low    { background:#EDFBE4; color:#1E5C08; border:1.5px solid #90D060; border-radius:8px; padding:4px 14px; font-size:12px; font-weight:600; display:inline-block; }
+.badge-high   { background:rgba(200,50,50,0.15); color:#c83030; border:1.5px solid rgba(200,80,80,0.35); border-radius:8px; padding:4px 14px; font-size:12px; font-weight:600; display:inline-block; }
+.badge-medium { background:rgba(200,160,0,0.15); color:#b07800; border:1.5px solid rgba(210,180,0,0.35); border-radius:8px; padding:4px 14px; font-size:12px; font-weight:600; display:inline-block; }
+.badge-low    { background:rgba(60,160,30,0.15); color:#2a8010; border:1.5px solid rgba(80,180,40,0.35); border-radius:8px; padding:4px 14px; font-size:12px; font-weight:600; display:inline-block; }
 
-.h-entry { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; border-radius:12px; margin-bottom:8px; background:#f8fafd; border:1.5px solid #e8eef6; transition:all 0.2s; animation:fadeUp 0.4s ease forwards; opacity:0; }
-.h-entry:hover { background:white; box-shadow:0 4px 16px rgba(10,31,60,0.08); transform:translateX(4px); }
+/* ── History entries: theme-aware ── */
+.h-entry {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 16px; border-radius:12px; margin-bottom:8px;
+    background:rgba(128,128,128,0.05); border:1.5px solid rgba(128,128,128,0.12);
+    transition:all 0.2s; animation:fadeUp 0.4s ease forwards; opacity:0;
+}
+.h-entry:hover { box-shadow:0 4px 16px rgba(0,0,0,0.1); transform:translateX(4px); }
 .h-entry:nth-child(1){animation-delay:.05s} .h-entry:nth-child(2){animation-delay:.1s}
 .h-entry:nth-child(3){animation-delay:.15s} .h-entry:nth-child(4){animation-delay:.2s}
 .h-entry:nth-child(5){animation-delay:.25s}
 
-.stat-box { background:white; border:1.5px solid #e8eef6; border-radius:14px; padding:16px; text-align:center; transition:all 0.2s; animation:fadeIn 0.5s ease forwards; }
-.stat-box:hover { transform:translateY(-4px); box-shadow:0 8px 24px rgba(10,31,60,0.1); }
+/* ── Stat boxes: theme-aware ── */
+.stat-box {
+    border:1.5px solid rgba(128,128,128,0.15); border-radius:14px;
+    padding:16px; text-align:center; transition:all 0.2s;
+    animation:fadeIn 0.5s ease forwards;
+}
+.stat-box:hover { transform:translateY(-4px); box-shadow:0 8px 24px rgba(0,0,0,0.1); }
 
 .info-hero-low    { background:linear-gradient(135deg,#1a7a30,#2db84a,#1a9e38); }
 .info-hero-medium { background:linear-gradient(135deg,#a06800,#e09010,#c87a00); }
@@ -168,12 +161,21 @@ section[data-testid="stSidebar"] div[data-testid="stButton"] button {
 
 .sign-pill { display:inline-flex; align-items:center; gap:8px; border-radius:99px; padding:7px 16px; font-size:13px; margin:4px; animation:fadeUp 0.4s ease forwards; opacity:0; }
 .sign-pill:nth-child(1){animation-delay:.1s} .sign-pill:nth-child(2){animation-delay:.18s}
-.sign-pill:nth-child(3){animation-delay:.26s} .sign-pill:nth-child(4){animation-delay:.34s} .sign-pill:nth-child(5){animation-delay:.42s}
+.sign-pill:nth-child(3){animation-delay:.26s} .sign-pill:nth-child(4){animation-delay:.34s}
+.sign-pill:nth-child(5){animation-delay:.42s}
 
-.do-card { background:white; border-radius:14px; padding:1.25rem; margin-bottom:10px; border:1.5px solid #e8eef6; display:flex; gap:14px; align-items:flex-start; animation:fadeUp 0.4s ease forwards; opacity:0; box-shadow:0 2px 8px rgba(10,31,60,0.04); transition:all 0.2s; }
-.do-card:hover { transform:translateX(6px); box-shadow:0 6px 20px rgba(10,31,60,0.1); }
+/* ── Do-cards: theme-aware background ── */
+.do-card {
+    border-radius:14px; padding:1.25rem; margin-bottom:10px;
+    border:1.5px solid rgba(128,128,128,0.15);
+    display:flex; gap:14px; align-items:flex-start;
+    animation:fadeUp 0.4s ease forwards; opacity:0;
+    box-shadow:0 2px 8px rgba(0,0,0,0.04); transition:all 0.2s;
+}
+.do-card:hover { transform:translateX(6px); box-shadow:0 6px 20px rgba(0,0,0,0.1); }
 .do-card:nth-child(1){animation-delay:.1s} .do-card:nth-child(2){animation-delay:.2s}
-.do-card:nth-child(3){animation-delay:.3s} .do-card:nth-child(4){animation-delay:.4s} .do-card:nth-child(5){animation-delay:.5s}
+.do-card:nth-child(3){animation-delay:.3s} .do-card:nth-child(4){animation-delay:.4s}
+.do-card:nth-child(5){animation-delay:.5s}
 .do-num { width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
 
 .info-stat { text-align:center; padding:1.5rem 1rem; border-radius:14px; color:white; animation:popIn 0.5s ease forwards; }
@@ -335,10 +337,10 @@ if page == "📋  Predict":
             st.markdown(f"### Result for **{student_name}**")
             st.markdown(f"""
             <div class="result-wrap {card_cls}">
-                <p style="font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:{color};opacity:0.7;margin:0 0 6px;font-weight:600;">Predicted stress level</p>
-                <p class="result-title" style="color:{color};">{label}</p>
-                <p style="font-size:13px;color:#333;margin:8px 0 16px;line-height:1.7;">{desc}</p>
-                <p style="font-size:12px;font-weight:600;color:{color};margin:0 0 4px;">Model confidence — {confidence}%</p>
+                <p style="font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.6);margin:0 0 6px;font-weight:600;">Predicted stress level</p>
+                <p class="result-title" style="color:white;">{label}</p>
+                <p style="font-size:13px;color:rgba(255,255,255,0.85);margin:8px 0 16px;line-height:1.7;">{desc}</p>
+                <p style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.6);margin:0 0 4px;">Model confidence — {confidence}%</p>
                 <div class="conf-track"><div class="conf-fill {bar_cls}" style="width:{confidence}%;"></div></div>
             </div>""", unsafe_allow_html=True)
 
@@ -348,8 +350,8 @@ if page == "📋  Predict":
                 <div class="tip-row">
                     <div class="tip-icon" style="background:{bg};">{icon}</div>
                     <div>
-                        <strong style="font-size:13px;color:#0a1f3c;">{title}</strong><br>
-                        <span style="font-size:12px;color:#556;">{body}</span>
+                        <strong style="font-size:13px;">{title}</strong><br>
+                        <span style="font-size:12px;opacity:0.65;">{body}</span>
                     </div>
                 </div>""", unsafe_allow_html=True)
 
@@ -379,12 +381,12 @@ elif page == "🕘  History":
         h = st.session_state.history
         c1, c2, c3, c4 = st.columns(4)
         for col, val, lbl, color in [
-            (c1, len(h),                                          "Total",     "#0a1f3c"),
-            (c2, sum(1 for x in h if x["result"] == "High"),     "🔴 High",   "#8B1A1A"),
-            (c3, sum(1 for x in h if x["result"] == "Medium"),   "🟡 Medium", "#7A4800"),
-            (c4, sum(1 for x in h if x["result"] == "Low"),      "🟢 Low",    "#1E5C08"),
+            (c1, len(h),                                          "Total",     "#5b8fd4"),
+            (c2, sum(1 for x in h if x["result"] == "High"),     "🔴 High",   "#e05050"),
+            (c3, sum(1 for x in h if x["result"] == "Medium"),   "🟡 Medium", "#d4a020"),
+            (c4, sum(1 for x in h if x["result"] == "Low"),      "🟢 Low",    "#50b840"),
         ]:
-            col.markdown(f'<div class="stat-box"><p style="font-size:32px;font-weight:800;color:{color};margin:0;">{val}</p><p style="font-size:11px;color:#8aa0bc;text-transform:uppercase;letter-spacing:0.06em;margin:4px 0 0;">{lbl}</p></div>', unsafe_allow_html=True)
+            col.markdown(f'<div class="stat-box"><p style="font-size:32px;font-weight:800;color:{color};margin:0;">{val}</p><p style="font-size:11px;opacity:0.5;text-transform:uppercase;letter-spacing:0.06em;margin:4px 0 0;">{lbl}</p></div>', unsafe_allow_html=True)
 
         st.markdown("<br>", unsafe_allow_html=True)
         csv = pd.DataFrame(h).to_csv(index=False).encode("utf-8")
@@ -404,8 +406,8 @@ elif page == "🕘  History":
                 <div style="display:flex;align-items:center;gap:12px;">
                     <div style="width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#1356a0,#0a1f3c);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;">{ini}</div>
                     <div>
-                        <strong style="font-size:13px;color:#0a1f3c;">{e['name']}</strong>
-                        <span style="font-size:11px;color:#9ab0cc;margin-left:6px;">· {e.get('gender','')}</span><br>
+                        <strong style="font-size:13px;">{e['name']}</strong>
+                        <span style="font-size:11px;opacity:0.5;margin-left:6px;">· {e.get('gender','')}</span><br>
                         <span style="font-size:11px;color:#9ab0cc;">{e['time']}</span>
                     </div>
                 </div>
@@ -441,14 +443,14 @@ elif page == "📖  Information":
         st.markdown("### 🔍 Signs of Low Stress")
         st.markdown("""
         <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:1.5rem;">
-            <span class="sign-pill" style="background:rgba(30,92,8,0.12);color:#1E5C08;border:1px solid rgba(30,92,8,0.2);">✅ Sleeping 7–8 hours consistently</span>
-            <span class="sign-pill" style="background:rgba(30,92,8,0.12);color:#1E5C08;border:1px solid rgba(30,92,8,0.2);">✅ Feeling in control of workload</span>
-            <span class="sign-pill" style="background:rgba(30,92,8,0.12);color:#1E5C08;border:1px solid rgba(30,92,8,0.2);">✅ Low screen & social media use</span>
-            <span class="sign-pill" style="background:rgba(30,92,8,0.12);color:#1E5C08;border:1px solid rgba(30,92,8,0.2);">✅ Good family support</span>
-            <span class="sign-pill" style="background:rgba(30,92,8,0.12);color:#1E5C08;border:1px solid rgba(30,92,8,0.2);">✅ Able to focus without feeling overwhelmed</span>
+            <span class="sign-pill" style="background:rgba(60,200,80,0.15);color:#3dc860;border:1px solid rgba(60,200,80,0.3);">✅ Sleeping 7–8 hours consistently</span>
+            <span class="sign-pill" style="background:rgba(60,200,80,0.15);color:#3dc860;border:1px solid rgba(60,200,80,0.3);">✅ Feeling in control of workload</span>
+            <span class="sign-pill" style="background:rgba(60,200,80,0.15);color:#3dc860;border:1px solid rgba(60,200,80,0.3);">✅ Low screen & social media use</span>
+            <span class="sign-pill" style="background:rgba(60,200,80,0.15);color:#3dc860;border:1px solid rgba(60,200,80,0.3);">✅ Good family support</span>
+            <span class="sign-pill" style="background:rgba(60,200,80,0.15);color:#3dc860;border:1px solid rgba(60,200,80,0.3);">✅ Able to focus without feeling overwhelmed</span>
         </div>""", unsafe_allow_html=True)
 
-        st.markdown("### 💚 What To Do")
+        st.markdown("### 🟢 What To Do")
         for icon, title, body in [
             ("🌿","Maintain your habits","Consistency is everything. Don't let good routines slip during busy academic periods."),
             ("📅","Plan proactively","Use a planner or digital calendar to stay ahead of deadlines before they pile up."),
@@ -458,8 +460,8 @@ elif page == "📖  Information":
             st.markdown(f"""
             <div class="do-card">
                 <div class="do-num" style="background:#d8f5c8;color:#1a7a30;">{icon}</div>
-                <div><strong style="font-size:14px;color:#0a1f3c;">{title}</strong><br>
-                <span style="font-size:13px;color:#556;line-height:1.6;">{body}</span></div>
+                <div><strong style="font-size:14px;">{title}</strong><br>
+                <span style="font-size:13px;opacity:0.65;line-height:1.6;">{body}</span></div>
             </div>""", unsafe_allow_html=True)
 
     elif info_sub == "🟡  Medium Stress":
@@ -482,11 +484,11 @@ elif page == "📖  Information":
         st.markdown("### 🔍 Signs of Medium Stress")
         st.markdown("""
         <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:1.5rem;">
-            <span class="sign-pill" style="background:rgba(122,72,0,0.1);color:#7A4800;border:1px solid rgba(122,72,0,0.2);">⚠️ Tired more often than usual</span>
-            <span class="sign-pill" style="background:rgba(122,72,0,0.1);color:#7A4800;border:1px solid rgba(122,72,0,0.2);">⚠️ Difficulty concentrating on tasks</span>
-            <span class="sign-pill" style="background:rgba(122,72,0,0.1);color:#7A4800;border:1px solid rgba(122,72,0,0.2);">⚠️ More time on screens to "escape"</span>
-            <span class="sign-pill" style="background:rgba(122,72,0,0.1);color:#7A4800;border:1px solid rgba(122,72,0,0.2);">⚠️ Anxious before exams or deadlines</span>
-            <span class="sign-pill" style="background:rgba(122,72,0,0.1);color:#7A4800;border:1px solid rgba(122,72,0,0.2);">⚠️ Mood fluctuations — irritable some days</span>
+            <span class="sign-pill" style="background:rgba(220,160,0,0.15);color:#f0b030;border:1px solid rgba(220,160,0,0.3);">⚠️ Tired more often than usual</span>
+            <span class="sign-pill" style="background:rgba(220,160,0,0.15);color:#f0b030;border:1px solid rgba(220,160,0,0.3);">⚠️ Difficulty concentrating on tasks</span>
+            <span class="sign-pill" style="background:rgba(220,160,0,0.15);color:#f0b030;border:1px solid rgba(220,160,0,0.3);">⚠️ More time on screens to "escape"</span>
+            <span class="sign-pill" style="background:rgba(220,160,0,0.15);color:#f0b030;border:1px solid rgba(220,160,0,0.3);">⚠️ Anxious before exams or deadlines</span>
+            <span class="sign-pill" style="background:rgba(220,160,0,0.15);color:#f0b030;border:1px solid rgba(220,160,0,0.3);">⚠️ Mood fluctuations — irritable some days</span>
         </div>""", unsafe_allow_html=True)
 
         st.markdown("### 🟡 What To Do")
@@ -499,8 +501,8 @@ elif page == "📖  Information":
             st.markdown(f"""
             <div class="do-card">
                 <div class="do-num" style="background:#fff0c0;color:#a06800;">{icon}</div>
-                <div><strong style="font-size:14px;color:#0a1f3c;">{title}</strong><br>
-                <span style="font-size:13px;color:#556;line-height:1.6;">{body}</span></div>
+                <div><strong style="font-size:14px;">{title}</strong><br>
+                <span style="font-size:13px;opacity:0.65;line-height:1.6;">{body}</span></div>
             </div>""", unsafe_allow_html=True)
 
     elif info_sub == "🔴  High Stress":
@@ -523,11 +525,11 @@ elif page == "📖  Information":
         st.markdown("### 🔍 Signs of High Stress")
         st.markdown("""
         <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:1.5rem;">
-            <span class="sign-pill" style="background:rgba(139,26,26,0.1);color:#8B1A1A;border:1px solid rgba(139,26,26,0.2);">🔴 Sleeping less than 5 hours regularly</span>
-            <span class="sign-pill" style="background:rgba(139,26,26,0.1);color:#8B1A1A;border:1px solid rgba(139,26,26,0.2);">🔴 Feeling overwhelmed or hopeless</span>
-            <span class="sign-pill" style="background:rgba(139,26,26,0.1);color:#8B1A1A;border:1px solid rgba(139,26,26,0.2);">🔴 High social media as distraction</span>
-            <span class="sign-pill" style="background:rgba(139,26,26,0.1);color:#8B1A1A;border:1px solid rgba(139,26,26,0.2);">🔴 Physical symptoms: headaches, fatigue</span>
-            <span class="sign-pill" style="background:rgba(139,26,26,0.1);color:#8B1A1A;border:1px solid rgba(139,26,26,0.2);">🔴 Strong peer pressure, feeling unsupported</span>
+            <span class="sign-pill" style="background:rgba(220,60,60,0.15);color:#f06060;border:1px solid rgba(220,60,60,0.3);">🔴 Sleeping less than 5 hours regularly</span>
+            <span class="sign-pill" style="background:rgba(220,60,60,0.15);color:#f06060;border:1px solid rgba(220,60,60,0.3);">🔴 Feeling overwhelmed or hopeless</span>
+            <span class="sign-pill" style="background:rgba(220,60,60,0.15);color:#f06060;border:1px solid rgba(220,60,60,0.3);">🔴 High social media as distraction</span>
+            <span class="sign-pill" style="background:rgba(220,60,60,0.15);color:#f06060;border:1px solid rgba(220,60,60,0.3);">🔴 Physical symptoms: headaches, fatigue</span>
+            <span class="sign-pill" style="background:rgba(220,60,60,0.15);color:#f06060;border:1px solid rgba(220,60,60,0.3);">🔴 Strong peer pressure, feeling unsupported</span>
         </div>""", unsafe_allow_html=True)
 
         st.markdown("### 🔴 What To Do")
@@ -541,8 +543,8 @@ elif page == "📖  Information":
             st.markdown(f"""
             <div class="do-card">
                 <div class="do-num" style="background:#ffd6d6;color:#8a0f0f;">{icon}</div>
-                <div><strong style="font-size:14px;color:#0a1f3c;">{title}</strong><br>
-                <span style="font-size:13px;color:#556;line-height:1.6;">{body}</span></div>
+                <div><strong style="font-size:14px;">{title}</strong><br>
+                <span style="font-size:13px;opacity:0.65;line-height:1.6;">{body}</span></div>
             </div>""", unsafe_allow_html=True)
 
         st.markdown("""
