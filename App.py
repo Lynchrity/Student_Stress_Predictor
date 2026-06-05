@@ -93,7 +93,6 @@ section[data-testid="stSidebar"] div[data-testid="stButton"] button {
 .hero-title   { font-size:28px; font-weight:800; margin:0 0 8px; animation:fadeUp 0.5s ease 0.1s both; line-height:1.2; }
 .hero-sub     { font-size:14px; opacity:0.7; margin:0; animation:fadeUp 0.5s ease 0.2s both; }
 
-/* ── Theme-aware section label ── */
 .sec-label {
     font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
     color:#1356a0; border-bottom:2px solid rgba(128,128,128,0.15);
@@ -120,7 +119,6 @@ section[data-testid="stSidebar"] div[data-testid="stButton"] button {
 .conf-medium { background:linear-gradient(90deg,#c89010,#f5c030); }
 .conf-low    { background:linear-gradient(90deg,#308020,#60c040); }
 
-/* ── Tip rows: use currentColor-compatible grays ── */
 .tip-row { display:flex; gap:14px; align-items:flex-start; padding:12px 0; border-bottom:1px solid rgba(128,128,128,0.12); animation:fadeUp 0.4s ease forwards; opacity:0; }
 .tip-row:last-child { border-bottom:none; }
 .tip-icon { width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
@@ -131,7 +129,6 @@ section[data-testid="stSidebar"] div[data-testid="stButton"] button {
 .badge-medium { background:rgba(200,160,0,0.15); color:#b07800; border:1.5px solid rgba(210,180,0,0.35); border-radius:8px; padding:4px 14px; font-size:12px; font-weight:600; display:inline-block; }
 .badge-low    { background:rgba(60,160,30,0.15); color:#2a8010; border:1.5px solid rgba(80,180,40,0.35); border-radius:8px; padding:4px 14px; font-size:12px; font-weight:600; display:inline-block; }
 
-/* ── History entries: theme-aware ── */
 .h-entry {
     display:flex; align-items:center; justify-content:space-between;
     padding:12px 16px; border-radius:12px; margin-bottom:8px;
@@ -143,7 +140,6 @@ section[data-testid="stSidebar"] div[data-testid="stButton"] button {
 .h-entry:nth-child(3){animation-delay:.15s} .h-entry:nth-child(4){animation-delay:.2s}
 .h-entry:nth-child(5){animation-delay:.25s}
 
-/* ── Stat boxes: theme-aware ── */
 .stat-box {
     border:1.5px solid rgba(128,128,128,0.15); border-radius:14px;
     padding:16px; text-align:center; transition:all 0.2s;
@@ -164,7 +160,6 @@ section[data-testid="stSidebar"] div[data-testid="stButton"] button {
 .sign-pill:nth-child(3){animation-delay:.26s} .sign-pill:nth-child(4){animation-delay:.34s}
 .sign-pill:nth-child(5){animation-delay:.42s}
 
-/* ── Do-cards: theme-aware background ── */
 .do-card {
     border-radius:14px; padding:1.25rem; margin-bottom:10px;
     border:1.5px solid rgba(128,128,128,0.15);
@@ -184,13 +179,10 @@ section[data-testid="stSidebar"] div[data-testid="stButton"] button {
 </style>
 """, unsafe_allow_html=True)
 
-# ── Session state init ──────────────────────────────────────────────
 if "history" not in st.session_state:
     st.session_state.history = []
-# active_nav = the true current page (decoupled from widget key)
 if "active_nav" not in st.session_state:
     st.session_state.active_nav = "📋  Predict"
-# nav_sel = radio widget key (never manually overwritten after render)
 if "nav_sel" not in st.session_state:
     st.session_state.nav_sel = "📋  Predict"
 
@@ -201,7 +193,6 @@ def load_model():
     return None
 model = load_model()
 
-# ── Resolve which options the radio should show ─────────────────────
 on_info = st.session_state.active_nav in [
     "📖  Information", "🟢  Low Stress", "🟡  Medium Stress", "🔴  High Stress"
 ]
@@ -222,16 +213,13 @@ else:
         "📖  Information",
     ]
 
-# ── Sidebar ─────────────────────────────────────────────────────────
 with st.sidebar:
-    # Logo
     st.markdown("""
     <div class="sidebar-logo-wrap">
         <span class="sidebar-logo-icon">🧠</span>
         <span class="sidebar-logo-text">StressCheck</span>
     </div>""", unsafe_allow_html=True)
 
-    # Invisible overlay button for logo click
     if st.button("logo", key="logo_btn"):
         st.session_state.active_nav = "📋  Predict"
         st.session_state.nav_sel    = "📋  Predict"
@@ -239,7 +227,6 @@ with st.sidebar:
 
     st.markdown("---")
 
-    # Unified radio — key is nav_sel, never manually set after this line
     raw_sel = st.radio(
         "",
         nav_options,
@@ -249,18 +236,13 @@ with st.sidebar:
 
     st.markdown("---")
 
-# ── Handle selection AFTER render (safe — reading, not writing widget key) ──
 if raw_sel == "📖  Information":
-    # Clicking the parent "Information" item → go to Low Stress sub-page
-    # We can't set nav_sel here, but we CAN update active_nav and rerun
-    # so next render the radio defaults to showing Low Stress highlighted
     if st.session_state.active_nav != "🟢  Low Stress":
         st.session_state.active_nav = "🟢  Low Stress"
         st.rerun()
 else:
     st.session_state.active_nav = raw_sel
 
-# ── Resolve page & info_sub from active_nav ─────────────────────────
 active = st.session_state.active_nav
 if active in ["🟢  Low Stress", "🟡  Medium Stress", "🔴  High Stress"]:
     page     = "📖  Information"
@@ -269,9 +251,6 @@ else:
     page     = active
     info_sub = "🟢  Low Stress"
 
-# ══════════════════════════════════════════════
-# PREDICT
-# ══════════════════════════════════════════════
 if page == "📋  Predict":
     st.markdown("""
     <div class="hero">
@@ -362,9 +341,6 @@ if page == "📋  Predict":
             })
            
 
-# ══════════════════════════════════════════════
-# HISTORY
-# ══════════════════════════════════════════════
 elif page == "🕘  History":
     st.markdown("""
     <div class="hero">
@@ -417,10 +393,7 @@ elif page == "🕘  History":
                 </div>
             </div>""", unsafe_allow_html=True)
 
-        
-# ══════════════════════════════════════════════
-# INFORMATION
-# ══════════════════════════════════════════════
+
 elif page == "📖  Information":
 
     if info_sub == "🟢  Low Stress":
