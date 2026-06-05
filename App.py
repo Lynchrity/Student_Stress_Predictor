@@ -319,7 +319,7 @@ if page == "📋  Predict":
             <p style="font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:#666;margin:0 0 6px;font-weight:600;">Predicted stress level</p>
             <p class="result-title" style="color:#222;">{label}</p>
             <p style="font-size:13px;color:#333;margin:8px 0 16px;line-height:1.7;">{desc}</p>
-            <p style="font-size:12px;font-weight:600;color:#555;margin:0 0 4px;">Model confidence — {confidence}%</p>
+            <p style="font-size:12px;font-weight:600;color:#555;margin:0 0 4px;">Model confidence in this result — {confidence}%</p>
             <div class="conf-track">
             <div class="conf-fill {bar_cls}" style="width:{confidence}%;"></div>
             </div>
